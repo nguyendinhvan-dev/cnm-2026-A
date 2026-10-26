@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 #[Fillable(['title', 'content', 'user_id', 'thumbnail'])]
 class Post extends Model
 {
+    use SoftDeletes;
+
     /**
      * Get full URL for thumbnail (fallback to placeholder)
      */
@@ -16,11 +18,8 @@ class Post extends Model
     {
         return $this->thumbnail
             ? asset('storage/' . $this->thumbnail)
-            : asset('images/default-thumb.png');
+            : null;
     }
-
-{
-    use SoftDeletes;
 
     public function user()
     {
